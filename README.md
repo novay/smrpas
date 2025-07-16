@@ -18,6 +18,9 @@ The SMR-PAS package integrates your application with the Samarinda Digital ID OA
 The package handles the OAuth flow, state validation, and token management, ensuring secure and efficient integration with the Samarinda Digital ID system.
 
 ### Installation
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/CAH3RYGNt1Q/0.jpg)](http://www.youtube.com/watch?v=CAH3RYGNt1Q "Video Title")
+
 Follow these steps to install and configure the SMR-PAS package in your Laravel application:
 
 #### 1. Install the Package
