@@ -1,0 +1,34 @@
+{
+    "name": "novay/smrpas",
+    "description": "Samarinda Digital ID integration for Laravel.",
+    "keywords": ["sso", "samarinda", "smrpas"],
+    "type": "project",
+    "license": "MIT",
+    "homepage": "https://github.com/novay/smrpas",
+    "authors": [
+        {
+            "name": "Novianto Rahmadi",
+            "email": "novay@btekno.id"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Novay\\Smrpas\\": "src/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "require": {}, 
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Novay\\Smrpas\\SmrpasServiceProvider"
+            ], 
+            "aliases": {
+                "Smrpas" : "Novay\\Smrpas\\Smrpas"
+            }
+        }
+    }
+}
