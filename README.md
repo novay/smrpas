@@ -36,21 +36,19 @@ php artisan vendor:publish --provider="Novay\Smrpas\SmrpasServiceProvider"
 This will copy the package’s configuration file (`config/smrpas.php`) and migrations to your application.
 
 #### 3. Run Migrations
-The package includes database migrations to set up OAuth-related tables. Run the migrations using:
+The package includes database migrations to set up OAuth-related tables. 
+We just need to target only the package’s migrations, run the migrations using:
+
 ```bash
-php artisan migrate
-```
-Note: Using `--path` to specify individual migration files is not recommended as it may skip other necessary migrations. The correct command is simply `php artisan migrate`, which will run all unpublished migrations, including those from the package (e.g., `2023_09_26_100536_create_oauths_table.php` located in `vendor/novay/smrpas/src/Database/migrations/`). If you need to target only the package’s migrations for debugging, you can use:
-```bash
-php artisan migrate --path=vendor/novay/smrpas/src/Database/migrations2023_09_26_100536_create_oauths_table.php
+php artisan migrate --path=vendor/novay/smrpas/src/Database/migrations/2023_09_26_100536_create_oauths_table.php
 ```
 
 #### 4. Configure Environment Variables
 Add the following environment variables to your `.env` file to configure the SMR-PAS OAuth integration:
 ```bash
-OAUTH_SERVER_ID=019813c5-d483-70da-b232-73427b8dce15
-OAUTH_SERVER_SECRET=HBCJ67s7e1JgE8vXmTjW53NT1angJIHuSea7AcpC
-OAUTH_SERVER_REDIRECT_URI=https://samadev.test/oauth/callback
+OAUTH_SERVER_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+OAUTH_SERVER_SECRET=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+OAUTH_SERVER_REDIRECT_URI=https://yourdomain.com/oauth/callback
 OAUTH_SERVER_URI=https://smrpas.samarindakota.go.id
 OAUTH_PROMPT=consent
 OAUTH_HOME=/dashboard
@@ -67,14 +65,34 @@ OAUTH_HOME=/dashboard
     - login: Forces the user to log in, even if they have an active session.
 - OAUTH_HOME: The route users are redirected to after successful authentication (e.g., `/dashboard`).
 
+#### 5. Use Trait in User Model
 
-#### 5. Verify Configuration
+To enable OAuth token management for users in your application, add the `TokenTrait` provided by the SMR-PAS package to your `User` model. This trait provides methods to handle OAuth tokens seamlessly.
+Update your `User` model (typically located at `app/Models/User.php`):
+
+```php
+<?php
+
+namespace App\Models;
+...
+use Novay\Smrpas\Traits\TokenTrait;
+
+class User extends ...
+{
+    use TokenTrait;
+    
+    // Other model properties and methods...
+```
+The `TokenTrait` adds functionality to manage OAuth access tokens, refresh tokens, and user authentication data retrieved from the SMR-PAS server.
+
+#### 6. Verify Configuration
 Ensure the `config/smrpas.php` file (published in step 2) contains the correct settings, and update it if needed to match your `.env` values.
 
 ### Usage
 To enable users to log in via Samarinda Digital ID, add a "Sign in with SMR-PAS" link to your application:
+```
 <a href="{{ route('smrpas.authorize') }}">Sign in via SMR-PAS</a>
-
+```
 This link triggers the OAuth authorization flow, redirecting users to the SMR-PAS server. After authentication, users are redirected back to your application’s callback URL (`OAUTH_SERVER_REDIRECT_URI`), and the package handles token exchange and user authentication.
 You can customize the redirect behavior or integrate additional logic by modifying the package’s routes or controllers (e.g., `Novay\Smrpas\Http\Controllers\AuthController`).
 
