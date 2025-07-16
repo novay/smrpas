@@ -90,7 +90,7 @@ Ensure the `config/smrpas.php` file (published in step 2) contains the correct s
 
 ### Usage
 To enable users to log in via Samarinda Digital ID, add a "Sign in with SMR-PAS" link to your application:
-```
+```html
 <a href="{{ route('smrpas.authorize') }}">Sign in via SMR-PAS</a>
 ```
 This link triggers the OAuth authorization flow, redirecting users to the SMR-PAS server. After authentication, users are redirected back to your application’s callback URL (`OAUTH_SERVER_REDIRECT_URI`), and the package handles token exchange and user authentication.
