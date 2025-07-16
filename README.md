@@ -58,15 +58,15 @@ OAUTH_HOME=/dashboard
 ```
 
 **Variable Descriptions:**
-- OAUTH_SERVER_ID: The client ID issued by the SMR-PAS OAuth server for your application.
-- OAUTH_SERVER_SECRET: The plain-text client secret issued by the SMR-PAS OAuth server (do not use the hashed version).
-- OAUTH_SERVER_REDIRECT_URI: The callback URL where the SMR-PAS server redirects users after authentication (must match the URI registered in the SMR-PAS server).
-- OAUTH_SERVER_URI: The base URL of the SMR-PAS OAuth server (e.g., `https://smrpas.samarindakota.go.id`).
-- OAUTH_PROMPT: The OAuth prompt behavior. Options are:
-    - none: No prompt; assumes the user is already authenticated.
-    - consent: Prompts the user to consent to sharing their data.
-    - login: Forces the user to log in, even if they have an active session.
-- OAUTH_HOME: The route users are redirected to after successful authentication (e.g., `/dashboard`).
+- `OAUTH_SERVER_ID`: The client ID issued by the SMR-PAS OAuth server for your application.
+- `OAUTH_SERVER_SECRET`: The plain-text client secret issued by the SMR-PAS OAuth server (do not use the hashed version).
+- `OAUTH_SERVER_REDIRECT_URI`: The callback URL where the SMR-PAS server redirects users after authentication (must match the URI registered in the SMR-PAS server).
+- `OAUTH_SERVER_URI`: The base URL of the SMR-PAS OAuth server (e.g., `https://smrpas.samarindakota.go.id`).
+- `OAUTH_PROMPT`: The OAuth prompt behavior. Options are:
+    - `none`: No prompt; assumes the user is already authenticated.
+    - `consent`: Prompts the user to consent to sharing their data.
+    - `login`: Forces the user to log in, even if they have an active session.
+- `OAUTH_HOME`: The route users are redirected to after successful authentication (e.g., `/dashboard`).
 
 #### 5. Use Trait in User Model
 
